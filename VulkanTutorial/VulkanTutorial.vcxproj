@@ -152,7 +152,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Device.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Pipeline.cpp" />
+    <ClCompile Include="SwapChain.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -160,6 +163,9 @@
     <None Include="shaders\shader.vert" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Device.h" />
+    <ClInclude Include="Pipeline.h" />
+    <ClInclude Include="SwapChain.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

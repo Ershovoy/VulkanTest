@@ -1,13 +1,13 @@
 #include "Window.h"
 
-Window::Window(int width, int height, char* name) : _width{ width }, _height{ height }, _windowName{ name }
+Window::Window(int width, int height, std::string name) : _width{ width }, _height{ height }, _windowName{ name }
 {
 	glfwInit();
 
 	glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
 	glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
-	_pWindow = glfwCreateWindow(width, height, name, nullptr, nullptr);
+	_pWindow = glfwCreateWindow(width, height, name.c_str(), nullptr, nullptr);
 }
 
 Window::~Window()

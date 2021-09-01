@@ -27,8 +27,8 @@ const std::vector<const char*> deviceExtensions = {
 	VK_KHR_SWAPCHAIN_EXTENSION_NAME
 };
 
-const uint32_t WIDTH = 640*2;
-const uint32_t HEIGHT = 480*2;
+const uint32_t WIDTH = 640 * 2;
+const uint32_t HEIGHT = 480 * 2;
 
 class HelloTriangleApplication
 {
@@ -96,8 +96,11 @@ private:
 
 		VkInstanceCreateInfo createInfo = { VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO };
 		createInfo.pApplicationInfo = &appInfo;
-		createInfo.ppEnabledLayerNames = validationLayers.data();
-		createInfo.enabledLayerCount = validationLayers.size();
+		if (enableValidationLayers)
+		{
+			createInfo.ppEnabledLayerNames = validationLayers.data();
+			createInfo.enabledLayerCount = validationLayers.size();
+		}
 		createInfo.ppEnabledExtensionNames = instanceExtensions.data();
 		createInfo.enabledExtensionCount = instanceExtensions.size();
 
@@ -336,7 +339,7 @@ private:
 		if (vkCreateCommandPool(device, &createInfo, nullptr, &commandPool) != VK_SUCCESS)
 			throw std::runtime_error("Failed to create command pool!");
 	}
-	
+
 	void createCommandBuffer()
 	{
 		VkCommandBufferAllocateInfo allocateInfo = { VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO };
@@ -442,8 +445,6 @@ private:
 
 			vkCmdEndRenderPass(commandBuffer);
 
-			//vkCmdClearColorImage(commandBuffer, images[imageIndex], VK_IMAGE_LAYOUT_GENERAL, &color, 1, &range);
-
 			vkEndCommandBuffer(commandBuffer);
 
 			VkPipelineStageFlags submitStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
@@ -471,8 +472,6 @@ private:
 			vkQueueWaitIdle(presentQueue);
 
 			vkResetCommandBuffer(commandBuffer, 0);
-			//vkFreeCommandBuffers(device, commandPool, 1, &commandBuffer);
-			//createCommandBuffer();
 		}
 	}
 
